@@ -20,6 +20,14 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
     
+    App\ActionHandler\DailyDataActionHandler:
+        arguments: 
+            $actions: [
+                '@App\Action\Account\FetchUserSession', 
+                '@App\Action\Account\FetchTradingAccounts',
+                '@App\Action\Gain\FetchDailyData',
+            ]
+
     App\ActionHandler\DailyGainsActionHandler:
         arguments: 
             $actions: [
@@ -35,8 +43,10 @@ services:
                 '@App\Action\Account\FetchAccounts',
             ]
 
+    App\ActionHandler\ActionHandlerInterface $dailyDataActionHandler: '@App\ActionHandler\DailyDataActionHandler'
     App\ActionHandler\ActionHandlerInterface $dailyGainActionHandler: '@App\ActionHandler\DailyGainsActionHandler'
     App\ActionHandler\ActionHandlerInterface $accountActionHandler: '@App\ActionHandler\AccountActionHandler'
 
+    App\Presentation\Output\TableInterface $dailyDataTable: '@App\Presentation\Output\DailyDataTable'
     App\Presentation\Output\TableInterface $dailyGainTable: '@App\Presentation\Output\DailyGainsTable'
     App\Presentation\Output\TableInterface $accountTable: '@App\Presentation\Output\AccountTable'

@@ -27,6 +27,17 @@ class MyFxBookRepository
         return $response['accounts'];
     }
 
+    public function dailyData(string $session, int $accountId): array
+    {
+        $response = $this->client->get($this->uriBuilder->build('dailyData', ['session' => $session, 'id' => $accountId]));
+
+        if (true === $response['error']) {
+            throw new \Exception($response['message']);
+        }
+
+        return $response['dataDaily'];
+    }
+
     public function dailyGains(string $session, int $accountId): array
     {
         $response = $this->client->get($this->uriBuilder->build('dailyGains', ['session' => $session, 'id' => $accountId]));

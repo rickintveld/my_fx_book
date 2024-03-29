@@ -10,6 +10,7 @@ class UriBuilder
     {
         return match ($builder) {
             'accounts' => (new AccountsUriBuilder())($parameters),
+            'dailyData' => (new DailyDataUriBuilder())($parameters),
             'dailyGains' => (new DailyGainsUriBuilder())($parameters),
             'login' => (new LoginUriBuilder())($parameters),
             'logout' => (new LogoutUriBuilder())($parameters),
