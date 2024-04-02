@@ -6,7 +6,6 @@ namespace App\ActionHandler;
 
 use App\Action\ActionInterface;
 use App\Dto\Aggregator\AggregateInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 
 abstract class ActionHandler implements ActionHandlerInterface
@@ -16,28 +15,21 @@ abstract class ActionHandler implements ActionHandlerInterface
      */
     public function __construct(
         private readonly iterable $actions,
-        private readonly LoggerInterface $logger,
-        private readonly EntityManagerInterface $entityManager
+        private readonly LoggerInterface $logger
     ) {
     }
 
     public function __invoke(AggregateInterface $aggregate): void
     {
-        $this->entityManager->getConnection()->beginTransaction();
-    
         foreach ($this->actions as $action) {
             $this->logger->info(sprintf('Executing: %s', get_class($action)));
-            
+
             try {
                 $action($aggregate);
             } catch (\Throwable $t) {
-                $this->logger->error($t->getMessage());
-                $this->entityManager->getConnection()->rollback();
-                
+                $this->logger->alert($t->getMessage());
                 break;
             }
         }
-
-        $this->entityManager->getConnection()->close();
     }
 }
