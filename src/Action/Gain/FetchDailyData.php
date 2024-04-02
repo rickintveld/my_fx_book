@@ -30,6 +30,6 @@ class FetchDailyData implements ActionInterface
             $dailyData = array_merge($dailyData, ...$this->myFxBookRepository->dailyData($aggregator->getSession(), $account['id']));
         }
 
-        $aggregator->setDailyData($dailyData);
+        $aggregator->setData($dailyData);
     }
 }

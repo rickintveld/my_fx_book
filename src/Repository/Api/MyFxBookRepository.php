@@ -67,4 +67,9 @@ class MyFxBookRepository implements MyFxBookRepositoryInterface
     {
         $this->client->get($this->uriBuilder->build('logout', ['session' => $session]));
     }
+
+    public function chartWidget(string $session, int $accountId): string
+    {
+        return $this->client->getBaseUri() . $this->uriBuilder->build('widget', ['session' => $session, 'id' => $accountId]);
+    }
 }

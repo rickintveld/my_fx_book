@@ -13,7 +13,7 @@ class MyFxBookClient extends Client
         parent::__construct($client);
     }
 
-    protected function getBaseUri(): string
+    public function getBaseUri(): string
     {
         return 'https://www.myfxbook.com';
     }

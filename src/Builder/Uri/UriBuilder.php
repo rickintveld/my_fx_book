@@ -14,6 +14,7 @@ class UriBuilder
             'dailyGains' => (new DailyGainsUriBuilder())($parameters),
             'login' => (new LoginUriBuilder())($parameters),
             'logout' => (new LogoutUriBuilder())($parameters),
+            'widget' => (new WidgetUriBuilder())($parameters),
             default => throw new \Exception('Builder not found!'),
         };
     }

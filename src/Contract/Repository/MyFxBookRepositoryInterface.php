@@ -32,4 +32,9 @@ interface MyFxBookRepositoryInterface
      * @throws \Exception
      */
     public function logout(string $session): void;
+    
+    /**
+     * @throws \Exception
+     */
+    public function chartWidget(string $session, int $accountId): string;
 }

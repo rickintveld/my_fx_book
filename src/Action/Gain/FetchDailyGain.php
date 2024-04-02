@@ -30,6 +30,6 @@ class FetchDailyGain implements ActionInterface
             $dailyGains = array_merge($dailyGains, ...$this->myFxBookRepository->dailyGains($aggregator->getSession(), $account['id']));
         }
 
-        $aggregator->setDailyGains($dailyGains);
+        $aggregator->setData($dailyGains);
     }
 }

@@ -1,11 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Command;
 
 use App\ActionHandler\ActionHandlerInterface;
-use App\Dto\Aggregator\DailyGainsAggregator;
+use App\Dto\Aggregator\WidgetAggregator;
 use App\Presentation\Output\TableInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -14,14 +12,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'fx:daily-gain',
-    description: 'Daily gain tables for all accounts',
+    name: 'fx:widget',
+    description: 'Creates a custom chart widget link for each account',
 )]
-class DailyGainCommand extends Command
+class WidgetCommand extends Command
 {
     public function __construct(
-        private readonly ActionHandlerInterface $dailyGainActionHandler,
-        private readonly TableInterface $dailyGainTable
+        private readonly ActionHandlerInterface $widgetActionHandler,
+        private readonly TableInterface $widgetTable
     ) {
         parent::__construct();
     }
@@ -29,13 +27,14 @@ class DailyGainCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $io->title('Daily gain for all trial accounts.');
+    
+        $io->title('Building the custom widgets');
 
-        $aggregator = new DailyGainsAggregator();
+        $aggregator = new WidgetAggregator();
 
-        ($this->dailyGainActionHandler)($aggregator);
+        ($this->widgetActionHandler)($aggregator);
 
-        $this->dailyGainTable->setRows($aggregator->getData())->render($output);
+        $this->widgetTable->setRows($aggregator->getData())->render($output);
 
         return Command::SUCCESS;
     }

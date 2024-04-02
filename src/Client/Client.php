@@ -23,5 +23,5 @@ abstract class Client
         return json_decode($response->getContent(), true);
     }
 
-    abstract protected function getBaseUri(): string;
+    abstract public function getBaseUri(): string;
 }

@@ -33,7 +33,7 @@ class DailyDataCommand extends Command
 
         ($this->dailyDataActionHandler)($aggregator);
 
-        $this->dailyDataTable->setRows($aggregator->getDailyData())->render($output);
+        $this->dailyDataTable->setRows($aggregator->getData())->render($output);
 
         return Command::SUCCESS;
     }
