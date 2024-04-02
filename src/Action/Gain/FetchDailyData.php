@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Action\Gain;
 
 use App\Action\ActionInterface;
+use App\Contract\Repository\MyFxBookRepositoryInterface;
 use App\Dto\Aggregator\AggregateInterface;
 use App\Dto\Aggregator\DailyDataAggregator;
-use App\Repository\Api\MyFxBookRepository;
 
 class FetchDailyData implements ActionInterface
 {
-    public function __construct(private readonly MyFxBookRepository $myFxBookRepository)
+    public function __construct(private readonly MyFxBookRepositoryInterface $myFxBookRepository)
     {
     }
 

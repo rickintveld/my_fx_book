@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Contract\Repository;
+
+use App\ValueObject\Session;
+
+interface MyFxBookRepositoryInterface
+{
+    /**
+     * @throws \Exception
+     */
+    public function accounts(string $session): array;
+    
+    /**
+     * @throws \Exception
+     */
+    public function dailyData(string $session, int $accountId): array;
+    
+    /**
+     * @throws \Exception
+     */
+    public function dailyGains(string $session, int $accountId): array;
+
+    /**
+     * @throws \Exception
+     */
+    public function login(string $email, string $password): Session;
+    
+    /**
+     * @throws \Exception
+     */
+    public function logout(string $session): void;
+}

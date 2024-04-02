@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace App\Action\Account;
 
 use App\Action\ActionInterface;
+use App\Contract\Repository\MyFxBookRepositoryInterface;
 use App\Dto\Aggregator\AggregateInterface;
 use App\Event\CreateAccountEvent;
-use App\Repository\Api\MyFxBookRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class FetchTradingAccounts implements ActionInterface
 {
     public function __construct(
         private readonly EventDispatcherInterface $eventBus,
-        private readonly MyFxBookRepository $myFxBookRepository
+        private readonly MyFxBookRepositoryInterface $myFxBookRepository
     ) {
     }
 

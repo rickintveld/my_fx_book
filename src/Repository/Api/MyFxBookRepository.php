@@ -6,9 +6,10 @@ namespace App\Repository\Api;
 
 use App\Builder\Uri\UriBuilder;
 use App\Client\MyFxBookClient;
+use App\Contract\Repository\MyFxBookRepositoryInterface;
 use App\ValueObject\Session;
 
-class MyFxBookRepository
+class MyFxBookRepository implements MyFxBookRepositoryInterface
 {
     public function __construct(
         private readonly MyFxBookClient $client,

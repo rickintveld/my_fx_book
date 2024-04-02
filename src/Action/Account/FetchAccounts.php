@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Action\Account;
 
 use App\Action\ActionInterface;
+use App\Contract\Repository\MyFxBookRepositoryInterface;
 use App\Dto\Aggregator\AggregateInterface;
 use App\Event\UpdateAccountEvent;
 use App\Repository\AccountRepository;
-use App\Repository\Api\MyFxBookRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class FetchAccounts implements ActionInterface
@@ -16,7 +16,7 @@ class FetchAccounts implements ActionInterface
     public function __construct(
         private readonly AccountRepository $accountRepository,
         private readonly EventDispatcherInterface $eventBus,
-        private readonly MyFxBookRepository $myFxBookRepository
+        private readonly MyFxBookRepositoryInterface $myFxBookRepository
     ) {
     }
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Subscriber;
 
+use App\Contract\Repository\MyFxBookRepositoryInterface;
 use App\Entity\User;
-use App\Repository\Api\MyFxBookRepository;
 use App\Event\LoginEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
@@ -15,7 +15,7 @@ final class LoginEventListener
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly MyFxBookRepository $myFxBookRepository
+        private readonly MyFxBookRepositoryInterface $myFxBookRepository
     ) {
     }
 

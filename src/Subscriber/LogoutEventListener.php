@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Subscriber;
 
-use App\Repository\Api\MyFxBookRepository;
+use App\Contract\Repository\MyFxBookRepositoryInterface;
 use App\Event\LogoutEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
@@ -14,7 +14,7 @@ final class LogoutEventListener
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly MyFxBookRepository $myFxBookRepository,
+        private readonly MyFxBookRepositoryInterface $myFxBookRepository,
     ) {
     }
 
