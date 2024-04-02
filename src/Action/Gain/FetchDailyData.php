@@ -20,10 +20,6 @@ class FetchDailyData implements ActionInterface
      */
     public function __invoke(AggregateInterface $aggregator): void
     {
-        if (in_array(null, [$aggregator->getSession(), $aggregator->getAccounts()])) {
-            throw new \Exception('Missing session and or accounts');
-        }
-
         $dailyData = [];
 
         foreach ($aggregator->getAccounts() as $account) {

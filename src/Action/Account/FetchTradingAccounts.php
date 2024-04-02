@@ -20,10 +20,6 @@ class FetchTradingAccounts implements ActionInterface
 
     public function __invoke(AggregateInterface $aggregator): void
     {
-        if (null === $aggregator->getSession()) {
-            throw new \Exception('The session is missing');
-        }
-    
         $accounts = $this->myFxBookRepository->accounts($aggregator->getSession());
 
         if (count($accounts) === 0) {

@@ -17,6 +17,10 @@ class AggregateRoot implements AggregateInterface
     
     public function getAccounts(): array
     {
+        if (empty($this->accounts)) {
+            throw new \Exception('No accounts found!');
+        }
+
         return $this->accounts;
     }
 
@@ -27,6 +31,10 @@ class AggregateRoot implements AggregateInterface
 
     public function getData(): array
     {
+        if (empty($this->data)) {
+            throw new \Exception('No data found!');
+        }
+
         return $this->data;
     }
 
