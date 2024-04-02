@@ -28,7 +28,7 @@ class CreateAccountEventListener
     {
         $account = $this->accountRepository->findOneBy(['accountId' => $event->account['accountId']]);
 
-        if (null !== $account) {
+        if (is_a($account, Account::class)) {
             $this->eventBus->dispatch(new UpdateAccountEvent($account, $event->account));
             return;
         }
