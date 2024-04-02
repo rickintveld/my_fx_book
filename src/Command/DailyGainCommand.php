@@ -29,7 +29,7 @@ class DailyGainCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $io->title('Daily gain for all trial accounts.');
+        $io->title('Daily gain for all active accounts.');
 
         $aggregator = new DailyGainsAggregator();
 
