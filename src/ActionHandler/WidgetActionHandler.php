@@ -6,5 +6,4 @@ namespace App\ActionHandler;
 
 class WidgetActionHandler extends ActionHandler 
 {
-    
 }
