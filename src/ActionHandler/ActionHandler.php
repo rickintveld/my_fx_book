@@ -26,12 +26,14 @@ abstract class ActionHandler implements ActionHandlerInterface
         $this->entityManager->getConnection()->beginTransaction();
     
         foreach ($this->actions as $action) {
+            $this->logger->info(sprintf('Executing: %s', get_class($action)));
+            
             try {
-                $this->logger->info(sprintf('Executing: %s', get_class($action)));
                 $action($aggregate);
             } catch (\Throwable $t) {
                 $this->logger->error($t->getMessage());
                 $this->entityManager->getConnection()->rollback();
+                
                 break;
             }
         }
