@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Dto\Aggregator;
 
-interface AggregateInterface 
+interface AggregateInterface
 {
     /**
      * @throws \Exception
      */
     public function getAccounts(): array;
- 
+
     public function setAccounts(array $accounts): void;
 
     /**

@@ -29,7 +29,7 @@ class WidgetCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-    
+
         $io->title('Building the custom widgets');
 
         $aggregator = new WidgetAggregator();

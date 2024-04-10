@@ -22,12 +22,11 @@ class FetchAccounts implements ActionInterface
     }
 
     public function __invoke(AggregateInterface $aggregator): void
-    {   
-        
+    {
         $myFxBookAccounts = $this->myFxBookRepository->accounts($aggregator->getSession());
 
         if (count($myFxBookAccounts) > 0) {
-            array_map(fn($account) => $this->eventBus->dispatch(new CreateAccountEvent($account)), $myFxBookAccounts);
+            array_map(fn ($account) => $this->eventBus->dispatch(new CreateAccountEvent($account)), $myFxBookAccounts);
         }
 
         if (null === $myFxBookAccounts) {
@@ -38,7 +37,7 @@ class FetchAccounts implements ActionInterface
 
         foreach ($accounts as $account) {
             $keys = array_keys(array_column($myFxBookAccounts, 'accountId'), $account->getAccountId());
-            
+
             if (count($keys) > 0) {
                 $key = array_shift($keys);
                 $this->eventBus->dispatch(new UpdateAccountEvent($account, $myFxBookAccounts[$key]));

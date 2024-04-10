@@ -20,7 +20,7 @@ class DailyGainsTable extends Table
         $rows = new \ArrayObject($rows);
         $iterator = $rows->getIterator();
 
-        while($iterator->valid()) {
+        while ($iterator->valid()) {
             $month = (int) (new \DateTime($iterator->current()['date']))->format('m');
 
             if ($iterator->key() === 0) {
@@ -33,7 +33,7 @@ class DailyGainsTable extends Table
             }
 
             $this->rows[] = $iterator->current();
-            
+
             $iterator->next();
         }
 

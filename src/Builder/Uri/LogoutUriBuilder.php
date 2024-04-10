@@ -13,7 +13,7 @@ class LogoutUriBuilder implements UriBuilderInterface
         if (false === isset($parameters['session'])) {
             throw new \Exception('Missing required key session');
         }
-        
+
         return urldecode(sprintf('%s?%s', self::uri, http_build_query(['session' => $parameters['session']])));
     }
 }

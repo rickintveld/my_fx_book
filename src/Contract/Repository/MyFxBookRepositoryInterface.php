@@ -12,12 +12,12 @@ interface MyFxBookRepositoryInterface
      * @throws \Exception
      */
     public function accounts(string $session): array;
-    
+
     /**
      * @throws \Exception
      */
     public function dailyData(string $session, int $accountId): array;
-    
+
     /**
      * @throws \Exception
      */
@@ -27,12 +27,12 @@ interface MyFxBookRepositoryInterface
      * @throws \Exception
      */
     public function login(string $email, string $password): Session;
-    
+
     /**
      * @throws \Exception
      */
     public function logout(string $session): void;
-    
+
     /**
      * @throws \Exception
      */

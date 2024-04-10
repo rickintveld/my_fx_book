@@ -20,7 +20,7 @@ class WidgetTable extends Table
 
     public function setRows(array $rows): self
     {
-        $this->rows = array_map(fn($row) => is_string($row) ? [$row] : $row, $rows);
+        $this->rows = array_map(fn ($row) => is_string($row) ? [$row] : $row, $rows);
 
         return $this;
     }

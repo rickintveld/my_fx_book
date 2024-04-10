@@ -33,9 +33,13 @@ class DailyGainCommand extends Command
 
         $aggregator = new DailyGainsAggregator();
 
-        ($this->dailyGainActionHandler)($aggregator);
-
-        $this->dailyGainTable->setRows($aggregator->getData())->render($output);
+        try {
+            ($this->dailyGainActionHandler)($aggregator);
+            $this->dailyGainTable->setRows($aggregator->getData())->render($output);
+        } catch (\Throwable $e) {
+            $io->error($e->getMessage());
+            return Command::FAILURE;
+        }
 
         return Command::SUCCESS;
     }

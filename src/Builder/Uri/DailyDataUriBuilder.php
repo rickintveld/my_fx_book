@@ -15,7 +15,7 @@ class DailyDataUriBuilder implements UriBuilderInterface
         }
 
         return urldecode(sprintf('%s?%s', self::uri, http_build_query([
-            'session' => $parameters['session'], 
+            'session' => $parameters['session'],
             'id' => $parameters['id'],
             'start' => sprintf('%s-01-01', date('Y')),
             'end' => date("Y-m-t"),

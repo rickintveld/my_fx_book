@@ -6,7 +6,7 @@ namespace App\Dto\Account;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class LoginCredentials 
+class LoginCredentials
 {
     #[Assert\Email]
     private string $email;

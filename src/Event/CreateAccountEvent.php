@@ -10,6 +10,5 @@ final class CreateAccountEvent extends Event
 {
     public function __construct(public readonly array $account)
     {
-        
     }
 }

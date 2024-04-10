@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Builder\Uri;
 
-class UriBuilder 
+class UriBuilder
 {
     public function build(string $builder, array $parameters): string
     {

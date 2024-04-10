@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
 #[AsEventListener]
-final class LoginEventListener 
+final class LoginEventListener
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
@@ -22,7 +22,7 @@ final class LoginEventListener
     public function __invoke(LoginEvent $event): void
     {
         $session = $this->myFxBookRepository->login(
-            $event->loginCredentials->getEmail(), 
+            $event->loginCredentials->getEmail(),
             $event->loginCredentials->getPassword()
         );
 

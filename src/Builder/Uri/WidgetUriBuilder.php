@@ -15,7 +15,7 @@ class WidgetUriBuilder implements UriBuilderInterface
         }
 
         return urldecode(sprintf('%s?%s', self::uri, http_build_query([
-            'session' => $parameters['session'], 
+            'session' => $parameters['session'],
             'id' => $parameters['id'],
             'height' => '200',
             'bart' => '1',

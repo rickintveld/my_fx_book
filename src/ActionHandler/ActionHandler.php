@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\ActionHandler;
 
 use App\Action\ActionInterface;
+use App\Contract\Strategy\CircuitBreakerInterface;
 use App\Dto\Aggregator\AggregateInterface;
 use Psr\Log\LoggerInterface;
 
@@ -15,6 +16,7 @@ abstract class ActionHandler implements ActionHandlerInterface
      */
     public function __construct(
         private readonly iterable $actions,
+        private readonly CircuitBreakerInterface $circuitBreaker,
         private readonly LoggerInterface $logger
     ) {
     }
@@ -24,12 +26,7 @@ abstract class ActionHandler implements ActionHandlerInterface
         foreach ($this->actions as $action) {
             $this->logger->info(sprintf('Executing: %s', get_class($action)));
 
-            try {
-                $action($aggregate);
-            } catch (\Throwable $t) {
-                $this->logger->alert($t->getMessage());
-                break;
-            }
+            $this->circuitBreaker->execute(fn () => $action($aggregate));
         }
     }
 }

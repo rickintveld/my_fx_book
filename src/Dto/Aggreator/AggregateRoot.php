@@ -14,7 +14,7 @@ class AggregateRoot implements AggregateInterface
     {
         $this->accounts = $accounts;
     }
-    
+
     public function getAccounts(): array
     {
         if (empty($this->accounts)) {

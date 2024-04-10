@@ -24,8 +24,8 @@ class UpdateAccountEventListener
     {
         $this->serializer->deserialize(
             json_encode($event->accountData),
-            Account::class, 
-            'json', 
+            Account::class,
+            'json',
             [AbstractNormalizer::OBJECT_TO_POPULATE => $event->account]
         );
 

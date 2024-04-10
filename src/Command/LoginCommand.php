@@ -31,7 +31,7 @@ class LoginCommand extends Command
     protected function configure(): void
     {
         $this->addArgument('email', InputArgument::REQUIRED, 'Email address')
-             ->addArgument('password', InputArgument::REQUIRED, 'Password');
+            ->addArgument('password', InputArgument::REQUIRED, 'Password');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -49,7 +49,7 @@ class LoginCommand extends Command
         }
 
         $this->eventDispatcher->dispatch(new LoginEvent($loginCredentials));
-        
+
         $io->success('User session token is created');
 
         return Command::SUCCESS;

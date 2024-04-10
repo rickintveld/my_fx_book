@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
 #[AsEventListener]
-final class LogoutEventListener 
+final class LogoutEventListener
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
@@ -21,7 +21,7 @@ final class LogoutEventListener
     public function __invoke(LogoutEvent $event): void
     {
         $this->myFxBookRepository->logout($event->user->getSession());
-    
+
         $this->entityManager->remove($event->user);
         $this->entityManager->flush();
     }

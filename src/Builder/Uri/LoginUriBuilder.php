@@ -13,7 +13,7 @@ class LoginUriBuilder implements UriBuilderInterface
         if (false === isset($parameters['email'], $parameters['password'])) {
             throw new \Exception('Missing required key email or password');
         }
-        
+
         return urldecode(sprintf('%s?%s', self::uri, http_build_query(['email' => $parameters['email'], 'password' => $parameters['password']])));
     }
 }

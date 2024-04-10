@@ -14,7 +14,7 @@ use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 #[AsEventListener()]
-class CreateAccountEventListener 
+class CreateAccountEventListener
 {
     public function __construct(
         private readonly AccountRepository $accountRepository,

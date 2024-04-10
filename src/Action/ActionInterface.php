@@ -6,7 +6,7 @@ namespace App\Action;
 
 use App\Dto\Aggregator\AggregateInterface;
 
-interface ActionInterface 
+interface ActionInterface
 {
     public function __invoke(AggregateInterface $aggregator): void;
 }

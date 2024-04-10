@@ -17,14 +17,14 @@ class Serializer extends CoreSerializer
             if ($innerObject instanceof \DateTimeInterface) {
                 return $innerObject;
             }
-            
+
             if (is_string($innerObject) && false !== \DateTime::createFromFormat('d/m/Y H:i', $innerObject)) {
                 $innerObject = new \DateTime($innerObject);
             }
-    
+
             return $innerObject;
         };
-    
+
         $defaultContext = [
             AbstractNormalizer::CALLBACKS => [
                 'creationDate' => $dateCallback,
@@ -32,10 +32,10 @@ class Serializer extends CoreSerializer
                 'lastUpdateDate' => $dateCallback
             ],
         ];
-    
+
         $encoders = [new JsonEncoder()];
-        $normalizers = [new ObjectNormalizer(null, null, null,null, null, null, $defaultContext)];
-        
+        $normalizers = [new ObjectNormalizer(null, null, null, null, null, null, $defaultContext)];
+
         parent::__construct($normalizers, $encoders);
     }
 }

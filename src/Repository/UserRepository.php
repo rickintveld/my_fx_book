@@ -26,10 +26,10 @@ class UserRepository extends ServiceEntityRepository
     public function findLatest(): ?User
     {
         return $this->createQueryBuilder('u')
-                    ->select('u')
-                    ->orderBy('u.id', 'DESC')
-                    ->setMaxResults(1)
-                    ->getQuery()
-                    ->getOneOrNullResult();
+            ->select('u')
+            ->orderBy('u.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }
