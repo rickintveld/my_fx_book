@@ -8,6 +8,9 @@ class HistoryUriBuilder implements UriBuilderInterface
 {
     private const uri = '/api/get-history.json';
 
+    /**
+     * @param array<string, int> $parameters
+     */
     public function __invoke(array $parameters): string
     {
         if (false === isset($parameters['session'], $parameters['id'])) {

@@ -6,6 +6,9 @@ namespace App\Builder\Uri;
 
 class UriBuilder
 {
+    /**
+     * @param array<mixed> $parameters
+     */
     public function build(string $builder, array $parameters): string
     {
         return match ($builder) {

@@ -8,6 +8,9 @@ class LoginUriBuilder implements UriBuilderInterface
 {
     private const uri = '/api/login.json';
 
+    /**
+     * @param array<string> $parameters
+     */
     public function __invoke(array $parameters): string
     {
         if (false === isset($parameters['email'], $parameters['password'])) {

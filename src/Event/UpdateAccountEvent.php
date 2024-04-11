@@ -9,6 +9,9 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class UpdateAccountEvent extends Event
 {
+    /**
+     * @param array<mixed> $accountData
+     */
     public function __construct(public readonly Account $account, public readonly array $accountData)
     {
     }

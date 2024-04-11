@@ -6,6 +6,9 @@ namespace App\Presentation\Output;
 
 class DailyDataTable extends Table
 {
+    /**
+     * @return array<string>
+     */
     public function getHeaders(): array
     {
         return [
@@ -20,11 +23,17 @@ class DailyDataTable extends Table
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getRows(): array
     {
         return $this->rows;
     }
 
+    /**
+     * @param array<mixed> $rows
+     */
     public function setRows(array $rows): self
     {
         $this->rows = $rows;

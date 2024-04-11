@@ -8,11 +8,17 @@ use Symfony\Component\Console\Helper\TableSeparator;
 
 class DailyGainsTable extends Table
 {
+    /**
+     * @return array<string>
+     */
     public function getHeaders(): array
     {
         return ['Date', 'RRR', 'Profit'];
     }
 
+    /**
+     * @param array<mixed> $rows
+     */
     public function setRows(array $rows): self
     {
         $previousMonth = 1;
@@ -40,6 +46,9 @@ class DailyGainsTable extends Table
         return $this;
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getRows(): array
     {
         return $this->rows;

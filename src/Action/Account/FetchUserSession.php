@@ -18,7 +18,7 @@ class FetchUserSession implements ActionInterface
     {
         $user = $this->userRepository->findLatest();
 
-        if (null === $user) {
+        if (null === $user || null === $user->getSession()) {
             throw new \Exception('Could not find a user session');
         }
 

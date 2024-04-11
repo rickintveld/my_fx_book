@@ -29,7 +29,7 @@ class FetchAccounts implements ActionInterface
             array_map(fn ($account) => $this->eventBus->dispatch(new CreateAccountEvent($account)), $myFxBookAccounts);
         }
 
-        if (null === $myFxBookAccounts) {
+        if (empty($myFxBookAccounts)) {
             throw new \Exception('No accounts found!');
         }
 

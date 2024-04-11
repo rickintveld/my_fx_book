@@ -15,6 +15,9 @@ abstract class Client
         $this->client = $client->withOptions((new HttpOptions())->setBaseUri($this->getBaseUri())->toArray());
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function get(string $uri): array
     {
         /** @var ResponseInterface $response */

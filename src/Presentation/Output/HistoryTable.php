@@ -8,11 +8,17 @@ use Symfony\Component\Console\Helper\TableSeparator;
 
 class HistoryTable extends Table
 {
+    /**
+     * @return array<string>
+     */
     public function getHeaders(): array
     {
         return ['Symbol', 'Lots', 'Open', 'Close', 'TP', 'SL', 'Pips', 'Profit'];
     }
 
+    /**
+     * @param array<mixed> $rows
+     */
     public function setRows(array $rows): self
     {
         $iterator = 0;
@@ -44,6 +50,9 @@ class HistoryTable extends Table
         return $this;
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getRows(): array
     {
         return $this->rows;

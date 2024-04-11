@@ -8,6 +8,9 @@ class LogoutUriBuilder implements UriBuilderInterface
 {
     private const uri = '/api/logout.json';
 
+    /**
+     * @param array<string> $parameters
+     */
     public function __invoke(array $parameters): string
     {
         if (false === isset($parameters['session'])) {

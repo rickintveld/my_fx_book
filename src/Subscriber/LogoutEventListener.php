@@ -20,6 +20,10 @@ final class LogoutEventListener
 
     public function __invoke(LogoutEvent $event): void
     {
+        if (null === $event->user->getSession()) {
+            throw new \Exception('A session is required to logout!');
+        }
+
         $this->myFxBookRepository->logout($event->user->getSession());
 
         $this->entityManager->remove($event->user);

@@ -8,6 +8,9 @@ class AccountsUriBuilder implements UriBuilderInterface
 {
     private const uri = '/api/get-my-accounts.json';
 
+    /**
+     * @param array<string> $parameters
+     */
     public function __invoke(array $parameters): string
     {
         if (false === isset($parameters['session'])) {

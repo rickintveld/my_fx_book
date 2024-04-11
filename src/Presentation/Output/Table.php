@@ -9,6 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class Table implements TableInterface
 {
+    /** @var array<mixed> */
     protected array $rows = [];
 
     public function render(OutputInterface $output): void
@@ -20,7 +21,13 @@ abstract class Table implements TableInterface
         $table->render();
     }
 
+    /**
+     * @return array<string>
+     */
     public abstract function getHeaders(): array;
 
+    /**
+     * @return array<mixed>
+     */
     public abstract function getRows(): array;
 }

@@ -8,6 +8,9 @@ class DailyDataUriBuilder implements UriBuilderInterface
 {
     private const uri = '/api/get-data-daily.json';
 
+    /**
+     * @param array<string, int> $parameters
+     */
     public function __invoke(array $parameters): string
     {
         if (false === isset($parameters['session'], $parameters['id'])) {

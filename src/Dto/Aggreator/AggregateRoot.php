@@ -6,8 +6,12 @@ namespace App\Dto\Aggregator;
 
 class AggregateRoot implements AggregateInterface
 {
+    /** @var array<mixed> */
     private array $accounts = [];
+
+    /** @var array<mixed> */
     private array $data = [];
+
     private ?string $session;
 
     public function setAccounts(array $accounts): void

@@ -9,21 +9,25 @@ use App\ValueObject\Session;
 interface MyFxBookRepositoryInterface
 {
     /**
+     * @return array<mixed>
      * @throws \Exception
      */
     public function accounts(string $session): array;
 
     /**
+     * @return array<mixed>
      * @throws \Exception
      */
     public function dailyData(string $session, int $accountId): array;
 
     /**
+     * @return array<mixed>
      * @throws \Exception
      */
     public function dailyGains(string $session, int $accountId): array;
 
     /**
+     * @return array<mixed>
      * @throws \Exception
      */
     public function history(string $session, int $accountId): array;

@@ -8,6 +8,9 @@ use App\Entity\Account;
 
 class AccountTable extends Table
 {
+    /**
+     * @return array<string>
+     */
     public function getHeaders(): array
     {
         return [
@@ -24,11 +27,17 @@ class AccountTable extends Table
         ];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getRows(): array
     {
         return $this->rows;
     }
 
+    /**
+     * @param array<mixed> $rows
+     */
     public function setRows(array $rows): self
     {
         foreach ($rows as $row) {
@@ -43,7 +52,7 @@ class AccountTable extends Table
                 'commission' => $row->getCommission(),
                 'profit factor' => $row->getProfitFactor(),
                 'pips' => $row->getPips(),
-                'startedAt' => $row->getFirstTradeDate()->format('d-m-Y')
+                'startedAt' => $row->getFirstTradeDate()?->format('d-m-Y')
             ];
         }
 

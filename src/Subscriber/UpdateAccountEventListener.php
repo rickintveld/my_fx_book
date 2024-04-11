@@ -20,7 +20,7 @@ class UpdateAccountEventListener
     ) {
     }
 
-    public function __invoke(UpdateAccountEvent $event)
+    public function __invoke(UpdateAccountEvent $event): void
     {
         $this->serializer->deserialize(
             json_encode($event->accountData),

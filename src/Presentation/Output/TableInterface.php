@@ -8,6 +8,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 interface TableInterface
 {
+    /**
+     * @param array<mixed> $rows
+     */
     public function setRows(array $rows): self;
 
     public function render(OutputInterface $output): void;

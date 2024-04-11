@@ -8,6 +8,9 @@ class WidgetUriBuilder implements UriBuilderInterface
 {
     private const uri = '/api/get-custom-widget.png';
 
+    /**
+     * @param array<string, int> $parameters
+     */
     public function __invoke(array $parameters): string
     {
         if (false === isset($parameters['session'], $parameters['id'])) {
