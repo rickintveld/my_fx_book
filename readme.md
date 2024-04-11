@@ -78,7 +78,7 @@ Generates progress chart widgets for each account
 
 ```mermaid
 sequenceDiagram
-Command-->>Aggregator: Execute the configured actions
+Command-->>Aggregator: Start the data aggregation
 Aggregator-->>ActionHandler: Aggregate the data from the actions
 loop CircuitBreaker
     ActionHandler->>ActionHandler: Validate the API connection on each action or break the circuit
