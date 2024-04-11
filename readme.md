@@ -54,11 +54,11 @@ Generates progress chart widgets for each account
 
 ```mermaid
 sequenceDiagram
-Command->>ActionHandler: Execute the configured actions
+Command->>Aggregator: Execute the configured actions
+Aggregator-->>ActionHandler: Aggregate the data from the actions
 loop CircuitBreaker
     ActionHandler->>ActionHandler: Validate the API connection or break the circuit
 end
-ActionHandler-->>Aggregator: Aggregate the data from the actions
 Aggregator-->>TablePresentation: Configure & build the output table
 TablePresentation-->>Command: Render the output table
 ```
