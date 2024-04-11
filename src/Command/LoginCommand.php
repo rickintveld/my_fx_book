@@ -8,9 +8,10 @@ use App\Dto\Account\LoginCredentials;
 use App\Event\LoginEvent;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -28,17 +29,17 @@ class LoginCommand extends Command
         parent::__construct();
     }
 
-    protected function configure(): void
-    {
-        $this->addArgument('email', InputArgument::REQUIRED, 'Email address')
-            ->addArgument('password', InputArgument::REQUIRED, 'Password');
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
-        $loginCredentials = LoginCredentials::new($input->getArgument('email'), $input->getArgument('password'));
+        /** @var QuestionHelper $helper */
+        $helper = $this->getHelper('question');
+
+        $email = $helper->ask($input, $output, new Question('Please enter your email: '));
+        $password = $helper->ask($input, $output, new Question('Please enter your password: '));
+
+        $loginCredentials = LoginCredentials::new($email, $password);
 
         $errors = $this->validator->validate($loginCredentials);
 
