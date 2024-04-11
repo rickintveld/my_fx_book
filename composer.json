@@ -73,6 +73,10 @@
     },
     "require-dev": {
         "phpstan/phpstan": "^1.10",
-        "symfony/maker-bundle": "^1.57"
+        "phpunit/phpunit": "^9.5",
+        "symfony/browser-kit": "7.0.*",
+        "symfony/css-selector": "7.0.*",
+        "symfony/maker-bundle": "^1.57",
+        "symfony/phpunit-bridge": "^7.0"
     }
 }
