@@ -52,8 +52,13 @@ Generates progress chart widgets for each account
 
 ## ⚙️ Architecture
 
-- Command
-- ActionHandler
-- Actions
-- CircuitBreaker
-- TablePresentation
+```mermaid
+sequenceDiagram
+Command->>ActionHandler: Execute the configured actions
+loop CircuitBreaker
+    ActionHandler->>ActionHandler: Validate the API connection or break the circuit
+end
+ActionHandler-->>Aggregator: Aggregate the data from the actions
+Aggregator-->>TablePresentation: Configure & build the output table
+TablePresentation-->>Command: Render the output table
+```
