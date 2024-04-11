@@ -60,6 +60,6 @@ loop CircuitBreaker
     ActionHandler->>ActionHandler: Validate the API connection on each action or break the circuit
 end
 ActionHandler-->>Aggregator: Save the state of the requested data
-Aggregator-->>TablePresentation: Configure & build the output table
-TablePresentation-->>Command: Render the output table
+Aggregator-->>Output: Configure & build the output table
+Output-->>Command: Render the output table
 ```
