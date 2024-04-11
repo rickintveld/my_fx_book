@@ -12,6 +12,7 @@ class UriBuilder
             'accounts' => (new AccountsUriBuilder())($parameters),
             'dailyData' => (new DailyDataUriBuilder())($parameters),
             'dailyGains' => (new DailyGainsUriBuilder())($parameters),
+            'history' => (new HistoryUriBuilder())($parameters),
             'login' => (new LoginUriBuilder())($parameters),
             'logout' => (new LogoutUriBuilder())($parameters),
             'widget' => (new WidgetUriBuilder())($parameters),

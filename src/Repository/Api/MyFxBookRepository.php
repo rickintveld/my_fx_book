@@ -50,6 +50,17 @@ class MyFxBookRepository implements MyFxBookRepositoryInterface
         return $response['dailyGain'];
     }
 
+    public function history(string $session, int $accountId): array
+    {
+        $response = $this->client->get($this->uriBuilder->build('history', ['session' => $session, 'id' => $accountId]));
+
+        if (true === $response['error']) {
+            throw new \Exception($response['message']);
+        }
+
+        return $response['history'];
+    }
+
     public function login(string $email, string $password): Session
     {
         $response = $this->client->get(

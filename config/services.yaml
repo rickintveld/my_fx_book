@@ -50,13 +50,23 @@ services:
                 '@App\Action\Account\FetchTradingAccounts',
                 '@App\Action\Presentation\ChartWidget',
             ]
+    
+    App\ActionHandler\HistoryActionHandler:
+        arguments:
+            $actions: [
+                '@App\Action\Account\FetchUserSession',
+                '@App\Action\Account\FetchTradingAccounts',
+                '@App\Action\Order\History',
+            ]
 
     App\ActionHandler\ActionHandlerInterface $accountActionHandler: '@App\ActionHandler\AccountActionHandler'
     App\ActionHandler\ActionHandlerInterface $dailyDataActionHandler: '@App\ActionHandler\DailyDataActionHandler'
     App\ActionHandler\ActionHandlerInterface $dailyGainActionHandler: '@App\ActionHandler\DailyGainsActionHandler'
+    App\ActionHandler\ActionHandlerInterface $historyActionHandler: '@App\ActionHandler\HistoryActionHandler'
     App\ActionHandler\ActionHandlerInterface $widgetActionHandler: '@App\ActionHandler\WidgetActionHandler'
 
     App\Presentation\Output\TableInterface $accountTable: '@App\Presentation\Output\AccountTable'
     App\Presentation\Output\TableInterface $dailyDataTable: '@App\Presentation\Output\DailyDataTable'
     App\Presentation\Output\TableInterface $dailyGainTable: '@App\Presentation\Output\DailyGainsTable'
+    App\Presentation\Output\TableInterface $historyTable: '@App\Presentation\Output\HistoryTable'
     App\Presentation\Output\TableInterface $widgetTable: '@App\Presentation\Output\WidgetTable'

@@ -26,6 +26,11 @@ interface MyFxBookRepositoryInterface
     /**
      * @throws \Exception
      */
+    public function history(string $session, int $accountId): array;
+
+    /**
+     * @throws \Exception
+     */
     public function login(string $email, string $password): Session;
 
     /**
