@@ -17,4 +17,9 @@ class MyFxBookClient extends Client
     {
         return 'https://www.myfxbook.com';
     }
+
+    public function getWidgetUri(): string
+    {
+        return 'https://widgets.myfxbook.com';
+    }
 }
