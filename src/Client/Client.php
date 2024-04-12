@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Client;
 
+use App\Mediator\JsonResponseMediator;
 use Symfony\Component\HttpClient\HttpOptions;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
@@ -23,7 +24,7 @@ abstract class Client
         /** @var ResponseInterface $response */
         $response = $this->client->request('GET', $uri);
 
-        return json_decode($response->getContent(), true);
+        return JsonResponseMediator::content($response);
     }
 
     abstract public function getBaseUri(): string;

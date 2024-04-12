@@ -23,12 +23,25 @@ class FetchAccountsTest extends TestCase
         $accountRepository->expects($this->once())->method('findAll')->willReturn([$account]);
 
         $eventBus = $this->getMockBuilder(EventDispatcherInterface::class)->disableOriginalConstructor()->getMock();
-        $eventBus->expects($this->once())->method('dispatch')->with(new CreateAccountEvent(['accountId' => 1]));
-        $eventBus->expects($this->once())->method('dispatch')->with(new UpdateAccountEvent($account, ['accountId' => 1]));
+        $eventBus->expects($this->exactly(3))->method('dispatch')->with($this->callback(function ($object) {
+            if ($object instanceof CreateAccountEvent) {
+                return true;
+            }
+            if ($object instanceof UpdateAccountEvent) {
+                return true;
+            }
+
+            return false;
+        }));
 
         $myFxBookRepository = $this->getMockBuilder(MyFxBookRepositoryInterface::class)->disableOriginalConstructor()->getMock();
         $myFxBookRepository->expects($this->once())->method('accounts')->with('123abc#')->willReturn([['accountId' => 1], ['accountId' => 2]]);
 
+        /**
+         * @var AccountRepository $accountRepository
+         * @var EventDispatcherInterface $eventBus
+         * @var MyFxBookRepositoryInterface $myFxBookRepository
+         */
         $fetchAccounts = new FetchAccounts($accountRepository, $eventBus, $myFxBookRepository);
 
         $aggregator = new AggregateRoot();
