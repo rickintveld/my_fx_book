@@ -74,6 +74,8 @@ Generates progress chart widgets for each account
 ./bin/console fx:widget
 ```
 
+![Custom chart widget](https://widgets.myfxbook.com/api/get-custom-widget.png?session=84ERPHolDAZRYMuq8Vnt2073989&id=10834837&height=200&bart=1&linet=0&bgColor=000000&gridColor=BDBDBD&lineColor=00CB05&barColor=FF8D0A&fontColor=FFFFFF&title=&titles=20&chartbgc=474747)
+
 ## ⚙️ Architecture
 
 ```mermaid
