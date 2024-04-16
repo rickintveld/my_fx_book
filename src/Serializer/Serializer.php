@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Serializer;
 
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -33,7 +34,7 @@ class Serializer extends CoreSerializer
             ],
         ];
 
-        $encoders = [new JsonEncoder()];
+        $encoders = [new JsonEncoder(), new CsvEncoder()];
         $normalizers = [new ObjectNormalizer(null, null, null, null, null, null, $defaultContext)];
 
         parent::__construct($normalizers, $encoders);
