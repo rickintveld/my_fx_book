@@ -19,11 +19,4 @@ interface File
     public function getFileName(): string;
 
     public function setFileName(string $fileName): self;
-
-    /**
-     * @throws \Exception
-     */
-    public function getFileExtension(): string;
-
-    public function setFileExtension(string $extension): self;
 }

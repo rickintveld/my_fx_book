@@ -6,8 +6,9 @@ namespace App\FileSystem;
 
 class CsvFile implements File
 {
+    private const FILE_EXTENSION = 'csv';
+
     private string $contents;
-    private string $extension;
     private string $fileName;
 
     /**
@@ -30,27 +31,12 @@ class CsvFile implements File
      */
     public function getFileName(): string
     {
-        return sprintf('%s.%s', $this->fileName, $this->extension);
+        return sprintf('%s.%s', $this->fileName, self::FILE_EXTENSION);
     }
 
     public function setFileName(string $fileName): self
     {
         $this->fileName = $fileName;
-
-        return $this;
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function getFileExtension(): string
-    {
-        return $this->extension;
-    }
-
-    public function setFileExtension(string $extension): self
-    {
-        $this->extension = $extension;
 
         return $this;
     }

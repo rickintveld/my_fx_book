@@ -49,12 +49,10 @@ class ExportCommand extends Command
         $actionHandler($aggregator);
 
         $csvFile = new CsvFile();
-        $csvFile
-            ->setFileName($handler)
-            ->setFileExtension('csv')
-            ->setContents(
-                $this->serializer->encode($aggregator->getData(), 'csv', ['csv_delimiter' => ','])
-            );
+        $csvFile->setFileName($handler);
+        $csvFile->setContents(
+            $this->serializer->encode($aggregator->getData(), 'csv', ['csv_delimiter' => ','])
+        );
 
         ($this->fileDownloadManager)($csvFile);
 
