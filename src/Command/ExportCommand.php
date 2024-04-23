@@ -23,7 +23,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class ExportCommand extends Command
 {
-    private const TYPES = ['daily_data', 'daily_gain', 'history'];
+    private const CHOICES = ['daily_data', 'daily_gain', 'history'];
 
     public function __construct(
         private readonly ActionHandlerManager $actionHandlerManager,
@@ -41,7 +41,7 @@ class ExportCommand extends Command
         /** @var QuestionHelper $helper */
         $helper = $this->getHelper('question');
 
-        $handler = $helper->ask($input, $output, new ChoiceQuestion('Please choose a data type: ', self::TYPES));
+        $handler = $helper->ask($input, $output, new ChoiceQuestion('Please choose a data type: ', self::CHOICES));
 
         $aggregator = new AggregateRoot();
 
@@ -56,7 +56,8 @@ class ExportCommand extends Command
 
         ($this->fileDownloadManager)($csvFile);
 
-        $io->success('Finished...');
+        $io->success(sprintf('Finished downloading data to: %s', $csvFile->getFileName()));
+
         return Command::SUCCESS;
     }
 }
