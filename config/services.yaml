@@ -61,7 +61,7 @@ services:
 
     App\Command\ExportCommand:
         arguments:
-            $postHookActions: [
+            $exportActions: [
                 '@App\Action\FileSystem\CreateCsvFileAction',
                 '@App\Action\Download\FileDownloadAction'
             ]

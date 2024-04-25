@@ -25,11 +25,11 @@ class ExportCommand extends Command
     private const CHOICES = ['daily_data', 'daily_gain', 'history'];
 
     /**
-     * @param array<ActionInterface> $postHookActions
+     * @param array<ActionInterface> $exportActions
      */
     public function __construct(
         private readonly ActionHandlerManager $actionHandlerManager,
-        private readonly array $postHookActions
+        private readonly array $exportActions
     ) {
         parent::__construct();
     }
@@ -49,7 +49,7 @@ class ExportCommand extends Command
         /** @var ActionHandler $actionHandler */
         $actionHandler = ($this->actionHandlerManager)($handler);
 
-        foreach ($this->postHookActions as $action) {
+        foreach ($this->exportActions as $action) {
             $actionHandler->postHook($action);
         }
 
