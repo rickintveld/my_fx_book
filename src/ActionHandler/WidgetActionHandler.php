@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace App\ActionHandler;
 
-class WidgetActionHandler extends ActionHandler
+final class WidgetActionHandler extends ActionHandler
 {
 }
