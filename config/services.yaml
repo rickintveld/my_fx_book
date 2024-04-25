@@ -59,6 +59,13 @@ services:
                 '@App\Action\Order\History',
             ]
 
+    App\Command\ExportCommand:
+        arguments:
+            $postHookActions: [
+                '@App\Action\FileSystem\CreateCsvFileAction',
+                '@App\Action\Download\FileDownloadAction'
+            ]
+
     App\ActionHandler\ActionHandlerInterface $accountActionHandler: '@App\ActionHandler\AccountActionHandler'
     App\ActionHandler\ActionHandlerInterface $dailyDataActionHandler: '@App\ActionHandler\DailyDataActionHandler'
     App\ActionHandler\ActionHandlerInterface $dailyGainActionHandler: '@App\ActionHandler\DailyGainsActionHandler'

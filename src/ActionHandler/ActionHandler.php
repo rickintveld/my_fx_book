@@ -12,13 +12,23 @@ use Psr\Log\LoggerInterface;
 abstract class ActionHandler implements ActionHandlerInterface
 {
     /**
-     * @param iterable<ActionInterface> $actions
+     * @param array<ActionInterface> $actions
      */
     public function __construct(
-        private readonly iterable $actions,
+        private array $actions,
         private readonly CircuitBreakerInterface $circuitBreaker,
         private readonly LoggerInterface $logger
     ) {
+    }
+
+    public function preHook(ActionInterface $action): void
+    {
+        array_unshift($this->actions, $action);
+    }
+
+    public function postHook(ActionInterface $action): void
+    {
+        array_push($this->actions, $action);
     }
 
     public function __invoke(AggregateInterface $aggregate): void

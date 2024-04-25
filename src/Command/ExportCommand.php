@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use App\ActionHandler\ActionHandler;
 use App\Dto\Aggregator\AggregateRoot;
-use App\FileSystem\CsvFile;
 use App\Manager\ActionHandlerManager;
-use App\Manager\FileDownloadManager;
-use App\Serializer\Serializer;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -27,8 +25,7 @@ class ExportCommand extends Command
 
     public function __construct(
         private readonly ActionHandlerManager $actionHandlerManager,
-        private readonly FileDownloadManager $fileDownloadManager,
-        private readonly Serializer $serializer
+        private readonly array $postHookActions
     ) {
         parent::__construct();
     }
@@ -45,18 +42,16 @@ class ExportCommand extends Command
 
         $aggregator = new AggregateRoot();
 
+        /** @var ActionHandler $actionHandler */
         $actionHandler = ($this->actionHandlerManager)($handler);
+
+        foreach ($this->postHookActions as $action) {
+            $actionHandler->postHook($action);
+        }
+
         $actionHandler($aggregator);
 
-        $csvFile = new CsvFile();
-        $csvFile->setFileName($handler);
-        $csvFile->setContents(
-            $this->serializer->encode($aggregator->getData(), 'csv', ['csv_delimiter' => ','])
-        );
-
-        ($this->fileDownloadManager)($csvFile);
-
-        $io->success(sprintf('Finished downloading data to: %s', $csvFile->getFileName()));
+        $io->success('Finished downloading the data...');
 
         return Command::SUCCESS;
     }

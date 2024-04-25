@@ -18,15 +18,15 @@ interface AggregateInterface
     public function setAccounts(array $accounts): void;
 
     /**
-     * @return array<mixed>
+     * @return mixed
      * @throws \Exception
      */
-    public function getData(): array;
+    public function getData(): mixed;
 
     /**
-     * @param array<mixed> $data
+     * @param mixed $data
      */
-    public function setData(array $data): void;
+    public function setData(mixed $data): void;
 
     /**
      * @throws \Exception

@@ -9,8 +9,8 @@ class AggregateRoot implements AggregateInterface
     /** @var array<mixed> */
     private array $accounts = [];
 
-    /** @var array<mixed> */
-    private array $data = [];
+    /** @var mixed */
+    private mixed $data = null;
 
     private ?string $session;
 
@@ -28,14 +28,14 @@ class AggregateRoot implements AggregateInterface
         return $this->accounts;
     }
 
-    public function setData(array $data): void
+    public function setData(mixed $data): void
     {
         $this->data = $data;
     }
 
-    public function getData(): array
+    public function getData(): mixed
     {
-        if (empty($this->data)) {
+        if ($this->data === null) {
             throw new \Exception('No data found!');
         }
 
