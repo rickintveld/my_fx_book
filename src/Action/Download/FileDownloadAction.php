@@ -9,9 +9,9 @@ use App\Dto\Aggregator\AggregateInterface;
 use App\FileSystem\File;
 use App\Manager\FileDownloadManager;
 
-final class FileDownloadAction implements ActionInterface
+final readonly  class FileDownloadAction implements ActionInterface
 {
-    public function __construct(private readonly FileDownloadManager $fileDownloadManager)
+    public function __construct(private FileDownloadManager $fileDownloadManager)
     {
     }
 

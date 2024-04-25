@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use App\Action\ActionInterface;
 use App\ActionHandler\ActionHandler;
 use App\Dto\Aggregator\AggregateRoot;
 use App\Manager\ActionHandlerManager;
@@ -23,6 +24,9 @@ class ExportCommand extends Command
 {
     private const CHOICES = ['daily_data', 'daily_gain', 'history'];
 
+    /**
+     * @param array<ActionInterface> $postHookActions
+     */
     public function __construct(
         private readonly ActionHandlerManager $actionHandlerManager,
         private readonly array $postHookActions

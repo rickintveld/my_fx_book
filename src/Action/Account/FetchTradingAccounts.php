@@ -10,11 +10,11 @@ use App\Dto\Aggregator\AggregateInterface;
 use App\Event\CreateAccountEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class FetchTradingAccounts implements ActionInterface
+final readonly class FetchTradingAccounts implements ActionInterface
 {
     public function __construct(
-        private readonly EventDispatcherInterface $eventBus,
-        private readonly MyFxBookRepositoryInterface $myFxBookRepository
+        private EventDispatcherInterface $eventBus,
+        private MyFxBookRepositoryInterface $myFxBookRepository
     ) {
     }
 

@@ -8,9 +8,9 @@ use App\Action\ActionInterface;
 use App\Contract\Repository\MyFxBookRepositoryInterface;
 use App\Dto\Aggregator\AggregateInterface;
 
-class History implements ActionInterface
+final readonly class History implements ActionInterface
 {
-    public function __construct(private readonly MyFxBookRepositoryInterface $myFxBookRepository)
+    public function __construct(private MyFxBookRepositoryInterface $myFxBookRepository)
     {
     }
 

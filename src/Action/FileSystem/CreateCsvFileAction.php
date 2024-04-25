@@ -9,9 +9,9 @@ use App\Dto\Aggregator\AggregateInterface;
 use App\FileSystem\CsvFile;
 use App\Serializer\Serializer;
 
-class CreateCsvFileAction implements ActionInterface
+final readonly class CreateCsvFileAction implements ActionInterface
 {
-    public function __construct(private readonly Serializer $serializer)
+    public function __construct(private Serializer $serializer)
     {
     }
 

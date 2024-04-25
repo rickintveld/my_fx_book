@@ -9,9 +9,9 @@ use App\Contract\Repository\MyFxBookRepositoryInterface;
 use App\Dto\Aggregator\AggregateInterface;
 use App\Dto\Aggregator\DailyGainsAggregator;
 
-class FetchDailyGain implements ActionInterface
+final readonly class FetchDailyGain implements ActionInterface
 {
-    public function __construct(private readonly MyFxBookRepositoryInterface $myFxBookRepository)
+    public function __construct(private MyFxBookRepositoryInterface $myFxBookRepository)
     {
     }
 

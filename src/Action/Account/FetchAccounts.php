@@ -12,12 +12,12 @@ use App\Event\UpdateAccountEvent;
 use App\Repository\AccountRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class FetchAccounts implements ActionInterface
+final readonly class FetchAccounts implements ActionInterface
 {
     public function __construct(
-        private readonly AccountRepository $accountRepository,
-        private readonly EventDispatcherInterface $eventBus,
-        private readonly MyFxBookRepositoryInterface $myFxBookRepository
+        private AccountRepository $accountRepository,
+        private EventDispatcherInterface $eventBus,
+        private MyFxBookRepositoryInterface $myFxBookRepository
     ) {
     }
 

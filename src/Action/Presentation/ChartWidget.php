@@ -8,9 +8,9 @@ use App\Action\ActionInterface;
 use App\Contract\Repository\MyFxBookRepositoryInterface;
 use App\Dto\Aggregator\AggregateInterface;
 
-class ChartWidget implements ActionInterface
+final readonly class ChartWidget implements ActionInterface
 {
-    public function __construct(private readonly MyFxBookRepositoryInterface $myFxBookRepository)
+    public function __construct(private MyFxBookRepositoryInterface $myFxBookRepository)
     {
     }
 
