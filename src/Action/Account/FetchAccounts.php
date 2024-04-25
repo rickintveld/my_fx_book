@@ -9,6 +9,7 @@ use App\Contract\Repository\MyFxBookRepositoryInterface;
 use App\Dto\Aggregator\AggregateInterface;
 use App\Event\CreateAccountEvent;
 use App\Event\UpdateAccountEvent;
+use App\Exception\AccountNotFoundException;
 use App\Repository\AccountRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -30,7 +31,7 @@ final readonly class FetchAccounts implements ActionInterface
         }
 
         if (empty($myFxBookAccounts)) {
-            throw new \Exception('No accounts found!');
+            throw new AccountNotFoundException();
         }
 
         $accounts = $this->accountRepository->findAll();

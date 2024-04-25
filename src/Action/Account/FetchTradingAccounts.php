@@ -8,6 +8,7 @@ use App\Action\ActionInterface;
 use App\Contract\Repository\MyFxBookRepositoryInterface;
 use App\Dto\Aggregator\AggregateInterface;
 use App\Event\CreateAccountEvent;
+use App\Exception\AccountNotFoundException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final readonly class FetchTradingAccounts implements ActionInterface
@@ -23,7 +24,7 @@ final readonly class FetchTradingAccounts implements ActionInterface
         $accounts = $this->myFxBookRepository->accounts($aggregator->getSession());
 
         if (count($accounts) === 0) {
-            throw new \Exception('No accounts found');
+            throw new AccountNotFoundException();
         }
 
         foreach ($accounts as $account) {
