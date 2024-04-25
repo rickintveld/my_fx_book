@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Builder\Uri;
 
+use App\Exception\MissingArgumentException;
+use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
+
 class AccountsUriBuilder implements UriBuilderInterface
 {
     private const uri = '/api/get-my-accounts.json';
@@ -14,7 +17,7 @@ class AccountsUriBuilder implements UriBuilderInterface
     public function __invoke(array $parameters): string
     {
         if (false === isset($parameters['session'])) {
-            throw new \Exception('Missing required key session');
+            throw new MissingArgumentException('session');
         }
 
         return urldecode(sprintf('%s?%s', self::uri, http_build_query(['session' => $parameters['session']])));

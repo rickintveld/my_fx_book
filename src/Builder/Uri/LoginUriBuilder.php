@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Builder\Uri;
 
+use App\Exception\MissingArgumentException;
+
 class LoginUriBuilder implements UriBuilderInterface
 {
     private const uri = '/api/login.json';
@@ -14,7 +16,7 @@ class LoginUriBuilder implements UriBuilderInterface
     public function __invoke(array $parameters): string
     {
         if (false === isset($parameters['email'], $parameters['password'])) {
-            throw new \Exception('Missing required key email or password');
+            throw new MissingArgumentException(['email', 'password']);
         }
 
         return urldecode(sprintf('%s?%s', self::uri, http_build_query(['email' => $parameters['email'], 'password' => $parameters['password']])));
