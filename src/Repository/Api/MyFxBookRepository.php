@@ -7,7 +7,9 @@ namespace App\Repository\Api;
 use App\Builder\Uri\UriBuilder;
 use App\Client\MyFxBookClient;
 use App\Contract\Repository\MyFxBookRepositoryInterface;
+use App\Exception\MyFxBookRequestException;
 use App\ValueObject\Session;
+use Symfony\Component\HttpFoundation\Response;
 
 class MyFxBookRepository implements MyFxBookRepositoryInterface
 {
@@ -22,7 +24,7 @@ class MyFxBookRepository implements MyFxBookRepositoryInterface
         $response = $this->client->get($this->uriBuilder->build('accounts', ['session' => $session]));
 
         if (true === $response['error']) {
-            throw new \Exception($response['message']);
+            throw new MyFxBookRequestException($response['message'], Response::HTTP_BAD_REQUEST);
         }
 
         return $response['accounts'];
@@ -33,7 +35,7 @@ class MyFxBookRepository implements MyFxBookRepositoryInterface
         $response = $this->client->get($this->uriBuilder->build('dailyData', ['session' => $session, 'id' => $accountId]));
 
         if (true === $response['error']) {
-            throw new \Exception($response['message']);
+            throw new MyFxBookRequestException($response['message'], Response::HTTP_BAD_REQUEST);
         }
 
         return $response['dataDaily'];
@@ -44,7 +46,7 @@ class MyFxBookRepository implements MyFxBookRepositoryInterface
         $response = $this->client->get($this->uriBuilder->build('dailyGains', ['session' => $session, 'id' => $accountId]));
 
         if (true === $response['error']) {
-            throw new \Exception($response['message']);
+            throw new MyFxBookRequestException($response['message'], Response::HTTP_BAD_REQUEST);
         }
 
         return $response['dailyGain'];
@@ -55,7 +57,7 @@ class MyFxBookRepository implements MyFxBookRepositoryInterface
         $response = $this->client->get($this->uriBuilder->build('history', ['session' => $session, 'id' => $accountId]));
 
         if (true === $response['error']) {
-            throw new \Exception($response['message']);
+            throw new MyFxBookRequestException($response['message'], Response::HTTP_BAD_REQUEST);
         }
 
         return $response['history'];
@@ -68,7 +70,7 @@ class MyFxBookRepository implements MyFxBookRepositoryInterface
         );
 
         if (true === $response['error']) {
-            throw new \Exception($response['message']);
+            throw new MyFxBookRequestException($response['message'], Response::HTTP_BAD_REQUEST);
         }
 
         return new Session($response['session']);
