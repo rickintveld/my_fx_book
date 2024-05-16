@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Manager;
 
 use App\ActionHandler\ActionHandlerInterface;
+use App\Exception\ClassNotFoundException;
 
 class ActionHandlerManager
 {
@@ -21,7 +22,7 @@ class ActionHandlerManager
             'daily_data' => $this->dailyDataActionHandler,
             'daily_gain' => $this->dailyGainActionHandler,
             'history' => $this->historyActionHandler,
-            default => throw new \Exception('Handler not found!'),
+            default => throw new ClassNotFoundException($handler),
         };
     }
 }

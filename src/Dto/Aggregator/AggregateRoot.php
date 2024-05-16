@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Dto\Aggregator;
 
+use App\Exception\AccountNotFoundException;
+use App\Exception\NoDataFoundException;
+use App\Exception\SessionNotFoundException;
+
 class AggregateRoot implements AggregateInterface
 {
     /** @var array<mixed> */
@@ -22,7 +26,7 @@ class AggregateRoot implements AggregateInterface
     public function getAccounts(): array
     {
         if (empty($this->accounts)) {
-            throw new \Exception('No accounts found!');
+            throw new AccountNotFoundException();
         }
 
         return $this->accounts;
@@ -36,7 +40,7 @@ class AggregateRoot implements AggregateInterface
     public function getData(): mixed
     {
         if ($this->data === null) {
-            throw new \Exception('No data found!');
+            throw new NoDataFoundException();
         }
 
         return $this->data;
@@ -50,7 +54,7 @@ class AggregateRoot implements AggregateInterface
     public function getSession(): string
     {
         if (null === $this->session) {
-            throw new \Exception('The session is missing');
+            throw new SessionNotFoundException();
         }
 
         return $this->session;

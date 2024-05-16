@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Builder\Uri;
 
+use App\Exception\ClassNotFoundException;
+
 class UriBuilder
 {
     /**
@@ -19,7 +21,7 @@ class UriBuilder
             'login' => (new LoginUriBuilder())($parameters),
             'logout' => (new LogoutUriBuilder())($parameters),
             'widget' => (new WidgetUriBuilder())($parameters),
-            default => throw new \Exception('Builder not found!'),
+            default => throw new ClassNotFoundException($builder),
         };
     }
 }
