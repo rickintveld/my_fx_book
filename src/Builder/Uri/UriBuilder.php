@@ -9,7 +9,6 @@ use App\Exception\ClassNotFoundException;
 class UriBuilder
 {
     /**
-     * @param string $builder
      * @param array<mixed> $parameters
      */
     public function build(string $builder, array $parameters): string
