@@ -13,7 +13,6 @@ class UriBuilder
      */
     public function build(string $builder, array $parameters): string
     {
-        
         return match ($builder) {
             'accounts' => (new AccountsUriBuilder())($parameters),
             'dailyData' => (new DailyDataUriBuilder())($parameters),
