@@ -7,7 +7,10 @@ namespace App\Strategy;
 use App\ActionHandler\ActionHandlerInterface;
 use App\Exception\ClassNotFoundException;
 
-class ActionHandlerStrategy
+/**
+ * @implements StrategyManagerInterface<ActionHandlerInterface>
+ */
+class ActionHandlerStrategy implements StrategyManagerInterface
 {
     public function __construct(
         private readonly ActionHandlerInterface $dailyDataActionHandler,
@@ -15,13 +18,13 @@ class ActionHandlerStrategy
         private readonly ActionHandlerInterface $historyActionHandler
     ) {}
 
-    public function __invoke(string $handler): ActionHandlerInterface
+    public function __invoke(string $strategy): ActionHandlerInterface
     {
-        return match ($handler) {
+        return match ($strategy) {
             'daily_data' => $this->dailyDataActionHandler,
             'daily_gain' => $this->dailyGainActionHandler,
             'history' => $this->historyActionHandler,
-            default => throw new ClassNotFoundException($handler),
+            default => throw new ClassNotFoundException($strategy),
         };
     }
 }

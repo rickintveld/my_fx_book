@@ -83,3 +83,6 @@ services:
     App\Presentation\Output\TableInterface $dailyGainTable: '@App\Presentation\Output\DailyGainsTable'
     App\Presentation\Output\TableInterface $historyTable: '@App\Presentation\Output\HistoryTable'
     App\Presentation\Output\TableInterface $widgetTable: '@App\Presentation\Output\WidgetTable'
+
+    App\Strategy\StrategyManagerInterface $actionHandlerStrategy: '@App\Strategy\ActionHandlerStrategy'
+    App\Strategy\StrategyManagerInterface $tableStrategy: '@App\Strategy\TableStrategy'

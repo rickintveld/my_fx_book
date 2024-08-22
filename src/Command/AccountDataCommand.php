@@ -1,13 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Command;
 
-use App\Action\ActionInterface;
-use App\ActionHandler\ActionHandler;
 use App\ActionHandler\ActionHandlerInterface;
 use App\Dto\Aggregator\AggregateRoot;
+use App\Presentation\Output\TableInterface;
 use App\Strategy\StrategyManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -18,20 +15,20 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'fx:export',
-    description: 'Exports the data from the MyFxBook API to a CSV file',
+    name: 'fx:account-data',
+    description: 'Fetch the chosen type of data for a single account.',
 )]
-class ExportCommand extends Command
+class AccountDataCommand extends Command
 {
-    private const CHOICES = ['daily_data', 'daily_gain', 'history'];
+    private const DATA_TYPES = ['daily_data', 'daily_gain', 'history'];
 
     /**
      * @param StrategyManagerInterface<ActionHandlerInterface> $actionHandlerStrategy
-     * @param array<ActionInterface> $postHooks
+     * @param StrategyManagerInterface<ActionHandlerInterface> $tableStrategy
      */
     public function __construct(
         private readonly StrategyManagerInterface $actionHandlerStrategy,
-        private readonly array $postHooks
+        private readonly StrategyManagerInterface $tableStrategy,
     ) {
         parent::__construct();
     }
@@ -39,25 +36,27 @@ class ExportCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $io->title('Exporting the data...');
+
+        /**
+         * @todo fetch all accounts
+         * @todo ask which account should be used
+         * @todo create a single account flow
+         */
 
         /** @var QuestionHelper $helper */
         $helper = $this->getHelper('question');
 
-        $handler = $helper->ask($input, $output, new ChoiceQuestion('Please choose a data type: ', self::CHOICES));
+        $dataType = $helper->ask($input, $output, new ChoiceQuestion('Please choose a data type: ', self::DATA_TYPES));
 
         $aggregator = new AggregateRoot();
 
-        /** @var ActionHandler $actionHandler */
-        $actionHandler = ($this->actionHandlerStrategy)($handler);
-
-        foreach ($this->postHooks as $action) {
-            $actionHandler->postHook($action);
-        }
-
+        /** @var ActionHandlerInterface $actionHandler */
+        $actionHandler = ($this->actionHandlerStrategy)($dataType);
         $actionHandler($aggregator);
 
-        $io->success('Finished downloading the data...');
+        /** @var TableInterface $table */
+        $table = ($this->tableStrategy)($dataType);
+        $table->setRows($aggregator->getData())->render($output);
 
         return Command::SUCCESS;
     }

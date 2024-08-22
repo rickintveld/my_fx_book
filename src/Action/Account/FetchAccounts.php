@@ -29,9 +29,7 @@ final readonly class FetchAccounts implements ActionInterface
             throw new AccountNotFoundException();
         }
 
-        if (count($myFxBookAccounts) > 0) {
-            array_map(fn($account) => $this->eventBus->dispatch(new CreateAccountEvent($account)), $myFxBookAccounts);
-        }
+        array_map(fn($account) => $this->eventBus->dispatch(new CreateAccountEvent($account)), $myFxBookAccounts);
 
         $accounts = $this->accountRepository->findAll();
 
