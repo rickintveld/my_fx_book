@@ -16,8 +16,7 @@ final readonly class FetchTradingAccounts implements ActionInterface
     public function __construct(
         private EventDispatcherInterface $eventBus,
         private MyFxBookRepositoryInterface $myFxBookRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(AggregateInterface $aggregator): void
     {
@@ -26,6 +25,7 @@ final readonly class FetchTradingAccounts implements ActionInterface
         if (count($accounts) === 0) {
             throw new AccountNotFoundException();
         }
+
 
         foreach ($accounts as $account) {
             $this->eventBus->dispatch(new CreateAccountEvent($account));

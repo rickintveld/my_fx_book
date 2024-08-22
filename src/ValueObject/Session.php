@@ -6,7 +6,5 @@ namespace App\ValueObject;
 
 readonly class Session
 {
-    public function __construct(public string $token)
-    {
-    }
+    public function __construct(public string $token) {}
 }

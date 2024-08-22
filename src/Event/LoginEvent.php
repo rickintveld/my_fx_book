@@ -9,7 +9,5 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 final class LoginEvent extends Event
 {
-    public function __construct(public readonly LoginCredentials $loginCredentials)
-    {
-    }
+    public function __construct(public readonly LoginCredentials $loginCredentials) {}
 }

@@ -18,8 +18,7 @@ abstract class ActionHandler implements ActionHandlerInterface
         private array $actions,
         private readonly CircuitBreakerInterface $circuitBreaker,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function preHook(ActionInterface $action): void
     {
@@ -36,7 +35,7 @@ abstract class ActionHandler implements ActionHandlerInterface
         foreach ($this->actions as $action) {
             $this->logger->info(sprintf('Executing: %s', get_class($action)));
 
-            $this->circuitBreaker->execute(fn () => $action($aggregate));
+            $this->circuitBreaker->execute(fn() => $action($aggregate));
         }
     }
 }

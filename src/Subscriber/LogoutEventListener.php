@@ -15,8 +15,7 @@ final class LogoutEventListener
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly MyFxBookRepositoryInterface $myFxBookRepository,
-    ) {
-    }
+    ) {}
 
     public function __invoke(LogoutEvent $event): void
     {

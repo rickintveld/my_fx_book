@@ -25,9 +25,9 @@ class HistoryTable extends Table
         $numberOfRows = count($rows);
 
         foreach ($rows as $accountHistory) {
-            $positions = array_filter($accountHistory, fn ($history) => 'Deposit' !== $history['action']);
+            $positions = array_filter($accountHistory, fn($history) => 'Deposit' !== $history['action']);
 
-            $positions = array_map(fn ($position) => [
+            $positions = array_map(fn($position) => [
                 'symbol' => $position['symbol'],
                 'lots' => $position['sizing']['value'],
                 'open' => $position['openPrice'],

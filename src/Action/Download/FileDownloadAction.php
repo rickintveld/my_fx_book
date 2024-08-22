@@ -12,9 +12,7 @@ use App\Manager\FileDownloadManager;
 
 final readonly  class FileDownloadAction implements ActionInterface
 {
-    public function __construct(private FileDownloadManager $fileDownloadManager)
-    {
-    }
+    public function __construct(private FileDownloadManager $fileDownloadManager) {}
 
     public function __invoke(AggregateInterface $aggregator): void
     {

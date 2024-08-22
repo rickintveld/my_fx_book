@@ -13,8 +13,7 @@ class ActionHandlerManager
         private readonly ActionHandlerInterface $dailyDataActionHandler,
         private readonly ActionHandlerInterface $dailyGainActionHandler,
         private readonly ActionHandlerInterface $historyActionHandler
-    ) {
-    }
+    ) {}
 
     public function __invoke(string $handler): ActionHandlerInterface
     {

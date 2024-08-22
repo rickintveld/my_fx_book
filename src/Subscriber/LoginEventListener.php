@@ -16,8 +16,7 @@ final class LoginEventListener
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly MyFxBookRepositoryInterface $myFxBookRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(LoginEvent $event): void
     {

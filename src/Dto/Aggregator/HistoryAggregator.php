@@ -4,6 +4,4 @@ declare(strict_types=1);
 
 namespace App\Dto\Aggregator;
 
-class HistoryAggregator extends AggregateRoot
-{
-}
+class HistoryAggregator extends AggregateRoot {}

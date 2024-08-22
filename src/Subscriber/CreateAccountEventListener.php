@@ -21,8 +21,7 @@ class CreateAccountEventListener
         private readonly EntityManagerInterface $entityManager,
         private readonly EventDispatcherInterface $eventBus,
         private readonly Serializer $serializer
-    ) {
-    }
+    ) {}
 
     public function __invoke(CreateAccountEvent $event): void
     {

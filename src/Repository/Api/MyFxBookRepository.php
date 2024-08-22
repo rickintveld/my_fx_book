@@ -16,8 +16,7 @@ class MyFxBookRepository implements MyFxBookRepositoryInterface
     public function __construct(
         private readonly MyFxBookClient $client,
         private readonly UriBuilder $uriBuilder
-    ) {
-    }
+    ) {}
 
     public function accounts(string $session): array
     {

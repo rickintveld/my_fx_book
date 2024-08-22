@@ -11,9 +11,7 @@ use App\Serializer\Serializer;
 
 final readonly class CreateCsvFileAction implements ActionInterface
 {
-    public function __construct(private Serializer $serializer)
-    {
-    }
+    public function __construct(private Serializer $serializer) {}
 
     public function __invoke(AggregateInterface $aggregator): void
     {

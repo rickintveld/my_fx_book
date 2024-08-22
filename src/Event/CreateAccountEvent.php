@@ -11,7 +11,5 @@ final class CreateAccountEvent extends Event
     /**
      * @param array<mixed> $account
      */
-    public function __construct(public readonly array $account)
-    {
-    }
+    public function __construct(public readonly array $account) {}
 }

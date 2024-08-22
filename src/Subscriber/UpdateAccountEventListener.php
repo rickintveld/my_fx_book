@@ -17,8 +17,7 @@ class UpdateAccountEventListener
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly Serializer $serializer
-    ) {
-    }
+    ) {}
 
     public function __invoke(UpdateAccountEvent $event): void
     {

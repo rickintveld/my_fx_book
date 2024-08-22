@@ -19,19 +19,18 @@ final readonly class FetchAccounts implements ActionInterface
         private AccountRepository $accountRepository,
         private EventDispatcherInterface $eventBus,
         private MyFxBookRepositoryInterface $myFxBookRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(AggregateInterface $aggregator): void
     {
         $myFxBookAccounts = $this->myFxBookRepository->accounts($aggregator->getSession());
 
-        if (count($myFxBookAccounts) > 0) {
-            array_map(fn ($account) => $this->eventBus->dispatch(new CreateAccountEvent($account)), $myFxBookAccounts);
-        }
-
         if (empty($myFxBookAccounts)) {
             throw new AccountNotFoundException();
+        }
+
+        if (count($myFxBookAccounts) > 0) {
+            array_map(fn($account) => $this->eventBus->dispatch(new CreateAccountEvent($account)), $myFxBookAccounts);
         }
 
         $accounts = $this->accountRepository->findAll();
