@@ -34,13 +34,9 @@ class HistoryCommand extends Command
 
         $aggregator = new HistoryAggregator();
 
-        try {
-            ($this->historyActionHandler)($aggregator);
-            $this->historyTable->setRows($aggregator->getData())->render($output);
-        } catch (\Exception $e) {
-            $io->error($e->getMessage());
-            return Command::FAILURE;
-        }
+        ($this->historyActionHandler)($aggregator);
+
+        $this->historyTable->setRows($aggregator->getData())->render($output);
 
         return Command::SUCCESS;
     }

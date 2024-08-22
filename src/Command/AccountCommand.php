@@ -33,13 +33,9 @@ class AccountCommand extends Command
 
         $aggregator = new AggregateRoot();
 
-        try {
-            ($this->accountActionHandler)($aggregator);
-            $this->accountTable->setRows($aggregator->getAccounts())->render($output);
-        } catch (\Throwable $e) {
-            $io->error($e->getMessage());
-            return Command::FAILURE;
-        }
+        ($this->accountActionHandler)($aggregator);
+
+        $this->accountTable->setRows($aggregator->getAccounts())->render($output);
 
         return Command::SUCCESS;
     }

@@ -31,14 +31,9 @@ class DailyDataCommand extends Command
 
         $aggregator = new DailyDataAggregator();
 
-        try {
-            ($this->dailyDataActionHandler)($aggregator);
-            $this->dailyDataTable->setRows($aggregator->getData())->render($output);
-        } catch (\Throwable $e) {
-            $io->error($e->getMessage());
-            return Command::FAILURE;
-        }
+        ($this->dailyDataActionHandler)($aggregator);
 
+        $this->dailyDataTable->setRows($aggregator->getData())->render($output);
 
         return Command::SUCCESS;
     }
