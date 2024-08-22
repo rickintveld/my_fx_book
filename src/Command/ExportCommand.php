@@ -7,7 +7,7 @@ namespace App\Command;
 use App\Action\ActionInterface;
 use App\ActionHandler\ActionHandler;
 use App\Dto\Aggregator\AggregateRoot;
-use App\Manager\ActionHandlerManager;
+use App\Strategy\ActionHandlerStrategy;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -28,8 +28,8 @@ class ExportCommand extends Command
      * @param array<ActionInterface> $exportActions
      */
     public function __construct(
-        private readonly ActionHandlerManager $actionHandlerManager,
-        private readonly array $exportActions
+        private readonly ActionHandlerStrategy $actionHandlerStrategy,
+        private readonly array $postHooks
     ) {
         parent::__construct();
     }
@@ -47,9 +47,9 @@ class ExportCommand extends Command
         $aggregator = new AggregateRoot();
 
         /** @var ActionHandler $actionHandler */
-        $actionHandler = ($this->actionHandlerManager)($handler);
+        $actionHandler = ($this->actionHandlerStrategy)($handler);
 
-        foreach ($this->exportActions as $action) {
+        foreach ($this->postHooks as $action) {
             $actionHandler->postHook($action);
         }
 

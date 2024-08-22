@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Manager;
+namespace App\Strategy;
 
 use App\ActionHandler\ActionHandlerInterface;
 use App\Exception\ClassNotFoundException;
 
-class ActionHandlerManager
+class ActionHandlerStrategy
 {
     public function __construct(
         private readonly ActionHandlerInterface $dailyDataActionHandler,
