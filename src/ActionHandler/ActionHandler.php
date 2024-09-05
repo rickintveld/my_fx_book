@@ -20,6 +20,15 @@ abstract class ActionHandler implements ActionHandlerInterface
         private readonly LoggerInterface $logger
     ) {}
 
+    public function __invoke(AggregateInterface $aggregate): void
+    {
+        foreach ($this->actions as $action) {
+            $this->logger->info(sprintf('Executing: %s', get_class($action)));
+
+            $this->circuitBreaker->execute(fn() => $action($aggregate));
+        }
+    }
+
     public function preHook(ActionInterface $action): void
     {
         array_unshift($this->actions, $action);
@@ -28,14 +37,5 @@ abstract class ActionHandler implements ActionHandlerInterface
     public function postHook(ActionInterface $action): void
     {
         array_push($this->actions, $action);
-    }
-
-    public function __invoke(AggregateInterface $aggregate): void
-    {
-        foreach ($this->actions as $action) {
-            $this->logger->info(sprintf('Executing: %s', get_class($action)));
-
-            $this->circuitBreaker->execute(fn() => $action($aggregate));
-        }
     }
 }

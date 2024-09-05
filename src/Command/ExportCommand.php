@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Action\ActionInterface;
-use App\ActionHandler\ActionHandler;
 use App\ActionHandler\ActionHandlerInterface;
 use App\Dto\Aggregator\AggregateRoot;
 use App\Strategy\StrategyManagerInterface;
@@ -48,7 +47,7 @@ class ExportCommand extends Command
 
         $aggregator = new AggregateRoot();
 
-        /** @var ActionHandler $actionHandler */
+        /** @var ActionHandlerInterface $actionHandler */
         $actionHandler = ($this->actionHandlerStrategy)($handler);
 
         foreach ($this->postHooks as $action) {
