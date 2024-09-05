@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use App\Contract\Repository\UserRepositoryInterface;
 use App\Event\LogoutEvent;
-use App\Repository\UserRepository;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -21,7 +21,7 @@ class LogoutCommand extends Command
 {
     public function __construct(
         private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly UserRepository $userRepository
+        private readonly UserRepositoryInterface $userRepository
     ) {
         parent::__construct();
     }
