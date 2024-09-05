@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace App\Action\Account;
 
 use App\Action\ActionInterface;
+use App\Contract\Repository\AccountRepositoryInterface;
 use App\Contract\Repository\MyFxBookRepositoryInterface;
 use App\Dto\Aggregator\AggregateInterface;
 use App\Event\CreateAccountEvent;
 use App\Event\UpdateAccountEvent;
 use App\Exception\AccountNotFoundException;
-use App\Repository\AccountRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final readonly class FetchAccounts implements ActionInterface
 {
     public function __construct(
-        private AccountRepository $accountRepository,
+        private AccountRepositoryInterface $accountRepository,
         private EventDispatcherInterface $eventBus,
         private MyFxBookRepositoryInterface $myFxBookRepository
     ) {}

@@ -3,12 +3,12 @@
 namespace App\Tests\Action\Account;
 
 use App\Action\Account\FetchAccounts;
+use App\Contract\Repository\AccountRepositoryInterface;
 use App\Contract\Repository\MyFxBookRepositoryInterface;
 use App\Dto\Aggregator\AggregateRoot;
 use App\Entity\Account;
 use App\Event\CreateAccountEvent;
 use App\Event\UpdateAccountEvent;
-use App\Repository\AccountRepository;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -19,10 +19,10 @@ class FetchAccountsTest extends TestCase
         $account = $this->createMock(Account::class);
         $account->method('getAccountId')->willReturn(1);
 
-        $accountRepository = $this->getMockBuilder(AccountRepository::class)->disableOriginalConstructor()->getMock();
+        $accountRepository = $this->getMockBuilder(AccountRepositoryInterface::class)->addMethods(['findAll'])->getMock();
         $accountRepository->expects($this->once())->method('findAll')->willReturn([$account]);
 
-        $eventBus = $this->getMockBuilder(EventDispatcherInterface::class)->disableOriginalConstructor()->getMock();
+        $eventBus = $this->getMockBuilder(EventDispatcherInterface::class)->getMock();
         $eventBus->expects($this->exactly(3))->method('dispatch')->with($this->callback(function ($object) {
             if ($object instanceof CreateAccountEvent) {
                 return true;
@@ -38,7 +38,7 @@ class FetchAccountsTest extends TestCase
         $myFxBookRepository->expects($this->once())->method('accounts')->with('123abc#')->willReturn([['accountId' => 1], ['accountId' => 2]]);
 
         /**
-         * @var AccountRepository $accountRepository
+         * @var AccountRepositoryInterface $accountRepository
          * @var EventDispatcherInterface $eventBus
          * @var MyFxBookRepositoryInterface $myFxBookRepository
          */

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Subscriber;
 
+use App\Contract\Repository\AccountRepositoryInterface;
 use App\Entity\Account;
 use App\Event\CreateAccountEvent;
 use App\Event\UpdateAccountEvent;
-use App\Repository\AccountRepository;
 use App\Serializer\Serializer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
@@ -17,7 +17,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class CreateAccountEventListener
 {
     public function __construct(
-        private readonly AccountRepository $accountRepository,
+        private readonly AccountRepositoryInterface $accountRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly EventDispatcherInterface $eventBus,
         private readonly Serializer $serializer
