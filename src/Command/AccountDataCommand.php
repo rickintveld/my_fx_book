@@ -45,6 +45,7 @@ class AccountDataCommand extends Command
 
         if (is_null($user)) {
             $io->error('No user found!');
+            return Command::FAILURE;
         }
 
         /** @var QuestionHelper $helper */
@@ -53,7 +54,7 @@ class AccountDataCommand extends Command
         $dataType = $helper->ask($input, $output, new ChoiceQuestion('Please choose a data type: ', self::DATA_TYPES));
 
         $aggregator = new AggregateRoot();
-        $aggregator->setSession($user->getSession());
+        $aggregator->setSession($user->getSession() ?? '');
         $aggregator->setAccounts([$account]);
 
         /** @var ActionHandlerInterface $actionHandler */

@@ -13,9 +13,12 @@ class MyFxBookManager
         private readonly MyFxBookRepositoryInterface $myFxBookRepository
     ) {}
 
+    /**
+     * @return array<int>
+     */
     public function accountIds(User $user): array
     {
-        $accounts = $this->myFxBookRepository->accounts($user->getSession());
+        $accounts = $this->myFxBookRepository->accounts($user->getSession() ?? '');
 
         return array_map(static fn($a) => $a['id'], $accounts);
     }
